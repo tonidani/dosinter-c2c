@@ -1,35 +1,37 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'sha256-0cw64x8vihMvqxNmETj9pij/+GYlyK+0Oj7PMq1jbjQ='">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'sha256-0cw64x8vihMvqxNmETj9pij/+XYlyK+0Oj7PMq1jbjQ='">
+
+  <title>Location</title>
+  <style>
+    /* Dodaj swoje style CSS tutaj */
+  </style>
+  <script src="location.html"></script>
 </head>
-
-<script src="sha256-0cw64x8vihMvqxNmETj9pij/+GYlyK+0Oj7PMq1jbjQ=">
-  var x = document.getElementById("demo");
+<body style="background-color:ghostwhite;">
+  <header>
+    <h1>Location</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
   
-  function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude;
-  }
+  <main>
   
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
-      x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-  }
+	<p id="demo"></p>
+  </main>
   
-  
-  document.addEventListener("DOMContentLoaded", getLocation);
-  </script>
-  
-<body>
-
-
-<p id="demo"></p>
-
+  <footer>
+    <p>&copy; 2023 My Web Page. All rights reserved.</p>
+  </footer>
 </body>
 </html>
 
