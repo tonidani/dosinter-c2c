@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def root():
-    return "Hello, world."
+    return "Heeeello, world."
 
 @app.route('/camera', methods=['GET'])
 def get_camera():
