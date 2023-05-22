@@ -22,7 +22,6 @@ dependency | commands
 --- | ---
 docker | [commands for Debian / Ubuntu](https://gist.github.com/smallwat3r/a1664013e6ca8fb9ee02dd4b886a4996)
 docker-compose | [commands for Debian / Ubuntu](https://gist.github.com/smallwat3r/05f4b4a7a8361901d23bfdd492e40870)
-make | `sudo apt install make`
 a domain or sub-domain | DNS A record needs to points to your server static IP
 open ports | 80 (http) and 443 (https)
 
@@ -69,43 +68,6 @@ FLASK_ENV=development
 FLASK_APP=example_app
 ```
 
-## Good to know
-
-If you're running your own application and not the example one from 
-this repository you probably need to update or replace the `src/Dockerfile` to 
-your needs (in terms of dependencies etc). It's also known that some Python 
-projects can have a hard time running from Python's Alpine images, so you might 
-want/need to switch to a more standard `python:3.8` image.  
-
-## Turning it on
-
-**Start application**
-```sh
-sudo make dc-start
-```
-<p style="text-align: center;">
- 🎉 Your web-app should now be running online with HTTPS 🎉   
-</p>
-
-**All commands**
-
-```console
-% make help
-Usage: make [TARGET ...]
-
-help            Show this help menu
-dc-stop         Stop docker (might need sudo)
-dc-start        Start docker (might need sudo)
-dc-start-local  Start docker for local dev (w/o nginx)
-```
-
-Auto checks are running weekly to update the certificates.  
-
-## License
-
-See [LICENSE](https://github.com/smallwat3r/docker-nginx-gunicorn-flask-letsencrypt/blob/master/LICENSE) file.  
-
-## Contact
 
 Please report issues or questions 
 [here](https://github.com/smallwat3r/docker-nginx-gunicorn-flask-letsencrypt/issues).
