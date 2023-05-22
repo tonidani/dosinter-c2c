@@ -7,7 +7,7 @@ This repository contains necessary files to build a web-app running
 with Nginx / Gunicorn / Flask / LetsEncrypt (Certbot) using Docker 
 and docker-compose.  
 
-**Note: Tested on Ubuntu 16.04, 18.04, 20.04**
+**Note: Tested on Ubuntu 16.04, 18.04, 20.04, 22.04**
 
 ## Docker
 
@@ -67,14 +67,3 @@ FLASK_ENV=development
 # configs are under ./src/example_app/__init__.py
 FLASK_APP=example_app
 ```
-
-
-Please report issues or questions 
-[here](https://github.com/smallwat3r/docker-nginx-gunicorn-flask-letsencrypt/issues).
-
-
-[![Buy me a coffee][buymeacoffee-shield]][buymeacoffee]
-
-
-[buymeacoffee-shield]: https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg
-[buymeacoffee]: https://www.buymeacoffee.com/smallwat3r
