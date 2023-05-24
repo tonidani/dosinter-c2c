@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <script src="{{ url_for('static', filename='responder.js') }}"></script>
+</head>
+<body style="background-color:ghostwhite;">
+  <header>
+    <h1>send_back</h1>
+    <a id="sender" href="resp://scamapp/?data={{ data }}">xd</a>
+  </header>
+  
+  <main>
+  
+	<p id="demo"></p>
+  </main>
+  {% endblock %}
+

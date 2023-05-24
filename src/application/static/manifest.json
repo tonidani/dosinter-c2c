@@ -31,6 +31,11 @@
         }
     ],
     "start_url": "/",
+    "intent_filters": {
+        "scope_url_scheme": "https",
+        "scope_url_host": "s444471.projektstudencki.pl",
+        "scope_url_path": "/"
+      },
     "display": "standalone",
     "orientation": "portrait"
 }

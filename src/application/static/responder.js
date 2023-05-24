@@ -1,0 +1,1 @@
+var sender = document.getElementById("sender").click();
