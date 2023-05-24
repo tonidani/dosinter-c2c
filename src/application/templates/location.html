@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'sha256-0cw64x8vihMvqxNmETj9pij/+XYlyK+0Oj7PMq1jbjQ='">
+{% extends "base.html" %}
 
-  <title>Location</title>
-  <style>
-    /* Dodaj swoje style CSS tutaj */
-  </style>
+{% block content %}
   <script src="{{ url_for('static', filename='location.js') }}"></script>
 </head>
 <body style="background-color:ghostwhite;">
@@ -28,10 +20,5 @@
   
 	<p id="demo"></p>
   </main>
-  
-  <footer>
-    <p>&copy; 2023 My Web Page. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+  {% endblock %}
 

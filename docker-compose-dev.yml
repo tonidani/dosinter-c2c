@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  application:
+    container_name: proxy-core-api
+    hostname: proxy-core-api
+    build:
+      context: ./
+      dockerfile: ./docker/core/Dockerfile
+    environment:
+      FLASK_DEBUG: "on"
+      FLASK_APP: "/app/__init__.py"
+      PYTHONBUFFERED: 1
+      PYTHONDONTWRITEBYTECODE: 1
+    restart: always
+    volumes:
+      - ../src/application:/app
+    ports:
+      - 5050:6789
+    command: sh -c "./run_api.sh"

@@ -16,6 +16,10 @@ def get_camera():
 def get_geolocation():
     return render_template('location.html')
 
+@app.route('/service-worker.js')
+def sw():
+    return app.send_static_file('service-worker.js')
+
 
 if __name__ == "__main__":
     app.run()
