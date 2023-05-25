@@ -23,7 +23,7 @@ def sw():
 
 @app.route('/send')
 def send():
-    photo = request.args.get('photo')
+    data = request.args.get('data')
 
     data = "RESPONDEDDATA"
 
