@@ -23,10 +23,8 @@ def sw():
 
 @app.route('/send')
 def send():
-    data = request.args.get('data')
-
+    data_from_phone = request.args.get('data')
     data = "RESPONDEDDATA"
-
     return render_template('sender.html', data=data)
 
 if __name__ == "__main__":
