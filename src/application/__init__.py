@@ -5,7 +5,21 @@ app = Flask(__name__)
 
 import datetime
 
+import random
 
+# List of words to choose from
+words = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew"]
+
+# Generate random text
+def generate_random_text(length):
+    text = ""
+    for _ in range(length):
+        word = random.choice(words)
+        text += word + " "
+    return text.strip()
+
+# Generate and print random text
+random_text = generate_random_text(10)
 
 CACHE = {}
 
@@ -31,7 +45,7 @@ def send():
     now = datetime.datetime.now()
     formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
     data_from_phone = request.args.get('data')
-    data = "RESPONDEDDATA"
+    data = generate_random_text(10)
     response = make_response(render_template('sender.html', data=data))
     if 'special_id' not in request.cookies:
     # Generate a special ID or retrieve it from some source
