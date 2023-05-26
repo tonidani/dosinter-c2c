@@ -28,7 +28,7 @@ services:
     build: ./${APP_FOLDER}
     volumes:
       - ./src:/opt/app
-    command: gunicorn --bind 0.0.0.0:5000 --workers 3 ${FLASK_APP}:app
+    command: gunicorn --bind 0.0.0.0:5000 --workers 1 ${FLASK_APP}:app
     environment:
       - FLASK_ENV=${FLASK_ENV}
     ports:

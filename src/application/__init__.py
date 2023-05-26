@@ -1,11 +1,24 @@
 # Mini Flask example app.
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, abort
 import os
+import datetime
+import random
+from functools import wraps
+
+
 app = Flask(__name__)
 
-import datetime
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = request.args.get('token')
 
-import random
+        if not token or token != 'super_haslo':
+            return abort(403)
+
+        return f(*args, **kwargs)
+
+    return decorated
 
 # List of words to choose from
 words = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew"]
@@ -30,7 +43,6 @@ def root():
 @app.route('/camera', methods=['GET'])
 def get_camera():
     return render_template('camera.html')
-
 
 @app.route('/geo', methods=['GET'])
 def get_geolocation():
@@ -58,6 +70,7 @@ def send():
     return response
 
 @app.route('/cache')
+@token_required
 def cache():
    return CACHE
 
