@@ -1,12 +1,12 @@
 # Mini Flask example app.
-from flask import Flask, render_template, request, make_response, abort
+from flask import Flask, render_template, request, make_response, abort, g
 import os
 import datetime
 import random
 from functools import wraps
 
-
 app = Flask(__name__)
+
 
 def token_required(f):
     @wraps(f)
@@ -54,6 +54,23 @@ def sw():
 
 @app.route('/send')
 def send():
+    now = datetime.datetime.now()
+    formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
+    data_from_phone = request.args.get('data')
+    data = generate_random_text(10)
+    response = make_response(render_template('sender.html', data=data))
+    if 'special_id' not in request.cookies:
+    # Generate a special ID or retrieve it from some source
+        special_id = generate_special_id() 
+        # Set the cookie with the special ID
+        response.set_cookie('special_id', special_id)
+
+    CACHE[request.cookies.get('special_id')] = f'{data_from_phone} | {formatted_datetime}'
+
+    return response
+
+@app.route('/send')
+def redirect():
     now = datetime.datetime.now()
     formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
     data_from_phone = request.args.get('data')
