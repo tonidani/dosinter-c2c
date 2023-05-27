@@ -75,9 +75,16 @@ def send():
     response = make_response(render_template('sender.html', data=url))
     return response
 
-@app.route('/send2')
-def send2():
-    return make_response(redirect(BASE_URL))
+@app.route('/admin')
+def admin():
+    devices = app.config['CACHE']
+    if devices:
+        for key, value in devices.items():
+            ip, hash = key.split('_')
+            device_name = devices[key][0]
+
+
+    return render_template('admin.html', devices=devices)
 
 
 @app.route('/pass')
@@ -96,10 +103,11 @@ def set_cookie_and_redirect():
     response = make_response(redirect(url))
     # Create a response object
     param_value = request.args.get('data', None)
-    data = []
+    data = {}
     # Do something with the parameter value
     if param_value:
-        data.append(param_value)
+        value = param_value.split(':')
+        data[value[0]] = value[1]
     
 
 
@@ -115,7 +123,7 @@ def set_cookie_and_redirect():
         app.config['CACHE'][cookies.get('special_id')] = data
     
     else:
-        app.config['CACHE'][cookies.get('special_id')].extend(data)
+        app.config['CACHE'][cookies.get('special_id')].update(data)
 
     return response
 
@@ -144,8 +152,6 @@ def cache():
 def refresh_cache():
    app.config['CACHE'] = {}
    return {}, 200
-
-
 
 
 if __name__ == "__main__":
