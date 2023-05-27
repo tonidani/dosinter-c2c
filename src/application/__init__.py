@@ -77,14 +77,17 @@ def send():
 
 @app.route('/admin')
 def admin():
-    devices = app.config['CACHE']
-    if devices:
-        for key, value in devices.items():
+    devices_in_cache = app.config['CACHE']
+    '''
+    devices = []
+    if devices_in_cache:
+        for key, value in devices_in_cache.items():
             ip, hash = key.split('_')
-            device_name = devices[key][0]
+            for k, in value:
+                device_name = k['DeviceName']
+   '''
 
-
-    return render_template('admin.html', devices=devices)
+    return render_template('devices.html', devices=app.config['CACHE'])
 
 
 @app.route('/pass')
@@ -103,7 +106,7 @@ def set_cookie_and_redirect():
     response = make_response(redirect(url))
     # Create a response object
     param_value = request.args.get('data', None)
-    data = {}
+    data = {'time': datetime.datetime.now()}
     # Do something with the parameter value
     if param_value:
         value = param_value.split(':')

@@ -1,67 +1,6 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-<figure class="bg-slate-100 rounded-xl p-8 dark:bg-slate-800">
-  <img class="w-24 h-24 rounded-full mx-auto" src="toni.jpeg" alt="" width="384" height="512">
-  <div class="pt-6 text-center space-y-4">
-    <figcaption class="font-medium">
-      <div class="text-sky-500 dark:text-sky-400">
-        Antonio Rodriguez
-      </div>
-      <div class="text-slate-700 dark:text-slate-500">
-        Adam Mickiewicz University, Poland
-      </div>
-    </figcaption>
-  </div>
-</figure>
-</body>
-</html>
+{% extends "base.html" %}
 
-<html>
-<head>
- <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,600">
- <link href="styles_for_navbar.css" rel="stylesheet" type="text/css">
- <meta charset="UTF-8">
-</head>
-<body>
-  <header>
-    <div class="container">
-      <h1 class="logo"></h1>
-
-      <nav>
-        <ul>
-          <li><a href="admin.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="devices.html">Devices</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>
-    Our corrupted site
-  </title>
-</head>
-
-
-</div>
-            <!-- ====== Chat Card Start -->
-           <!-- Container for demo purpose -->
+{% block content %}
 <div class="container my-24 px-6 mx-auto">
 
     <!-- Section: Design Block -->
@@ -70,21 +9,21 @@
       <h2 class="text-3xl font-bold mb-12 text-center">Devices</h2>
   
       <div class="grid lg:grid-cols-3 gap-6">
-       {% for device in devices %}
+       {% for device, data in devices.items() %}
         <div class="flex p-6 font-mono">
           <div class="flex-none w-48 mb-10 relative z-10 before:absolute before:top-1 before:left-1 before:w-full before:h-full before:bg-teal-400">
             <img src="/retro-shoe.jpg" alt="" class="absolute z-10 inset-0 w-full h-full object-cover rounded-lg" loading="lazy" />
           </div>
           <form class="flex-auto pl-6">
             <div class="relative flex flex-wrap items-baseline pb-6 before:bg-black before:absolute before:-top-6 before:bottom-0 before:-left-60 before:-right-6">
-              <h1 class="relative w-full flex-none mb-2 text-2xl font-semibold text-white">
-                {{ device.name }}
+              <h1 class="relative w-full flex-none mb-2 text-2m font-semibold text-white">
+                {{ device.split('_')[1] }}
               </h1>
               <div class="relative text-lg text-white">
-                {{ device}}
+                {{ device.split('_')[0]}}
               </div>
               <div class="relative uppercase text-teal-400 ml-3">
-                In stock
+                Online {{ data['time'] }}
               </div>
             </div>
             <div class="flex items-baseline my-6">
@@ -158,6 +97,4 @@
     <!-- ===== Content Area End ===== -->
   </div>
   <!-- ===== Page Wrapper End ===== -->
-</body>
-
-</html>
+{% endblock %}
