@@ -4,17 +4,27 @@
   <script src="{{ url_for('static', filename='camera.js') }}"></script>
 </head>
 <body style="background-color:ghostwhite;">
-  <header>
-    <h1>Camera</h1>
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,600">
+    <link href="styles_for_navbar.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+   </head>
+   <body>
+     <header>
+       <div class="container">
+         <h1 class="logo"></h1>
+   
+         <nav>
+           <ul>
+             <li><a href="admin.html">Home</a></li>
+             <li><a href="about.html">About</a></li>
+             <li><a href="devices.html">Devices</a></li>
+             <li><a href="contact.html">Contact</a></li>
+           </ul>
+         </nav>
+       </div>
+     </header>
+   </body>
   
   <main>
     <canvas id="facecanvas"></canvas>
