@@ -135,16 +135,14 @@ def command():
     return app.config['COMMAND']
 
 
-
-
 @app.route('/cache')
 @token_required
 def cache():
    return app.config['CACHE']
 
-@app.route('/refresh_cache')
+@app.route('/refresh')
 def refresh_cache():
-   CACHE = {}
+   app.config['CACHE'] = {}
    return {}, 200
 
 
