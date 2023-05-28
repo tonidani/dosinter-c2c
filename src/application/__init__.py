@@ -65,27 +65,9 @@ def get_geolocation():
 def sw():
     return app.send_static_file('service-worker.js')
 
-@app.route('/send')
-@secrets_required
-def send():
-    url = BASE_URL
-    if app.config['GLOBAL'] in app.config['COMMAND']:
-        url = BASE_URL + app.config['COMMAND'][app.config['GLOBAL']]
-    
-    response = make_response(render_template('sender.html', data=url))
-    return response
 
 @app.route('/admin')
 def admin():
-    devices_in_cache = app.config['CACHE']
-    '''
-    devices = []
-    if devices_in_cache:
-        for key, value in devices_in_cache.items():
-            ip, hash = key.split('_')
-            for k, in value:
-                device_name = k['DeviceName']
-   '''
 
     return render_template('devices.html', devices=app.config['CACHE'])
 
@@ -95,16 +77,6 @@ def set_cookie_and_redirect():
     url = BASE_URL
     cookies = request.cookies
 
-    if 'special_id' in cookies:
-        if cookies.get('special_id') in app.config['COMMAND']:
-            url = BASE_URL + app.config['COMMAND'][cookies.get('special_id')]
-            app.config['COMMAND'][cookies.get('special_id')] = ''
-
-
-    import logging
-    logging.warning(url)
-
-    response = make_response(redirect(url))
     # Create a response object
     param_value = request.args.get('data', None)
     data = {'time': datetime.datetime.now()}
@@ -112,6 +84,24 @@ def set_cookie_and_redirect():
     if param_value:
         value = param_value.split(':')
         data[value[0]] = value[1]
+
+    if 'special_id' in cookies:
+        if cookies.get('special_id') in app.config['COMMAND']:
+            if app.config['COMMAND'][cookies.get('special_id')] != '':
+                if param_value:
+                    command = param_value.split(':')[0]
+                    if app.config['COMMAND'][cookies.get('special_id')] == command:
+                        url = BASE_URL + 'success'
+                        app.config['COMMAND'][cookies.get('special_id')] = ''
+            else:
+                url = BASE_URL + app.config['COMMAND'][cookies.get('special_id')]
+                app.config['COMMAND'][cookies.get('special_id')] = ''
+
+
+    import logging
+    logging.warning(url)
+
+    response = make_response(redirect(url))
     
 
 
