@@ -99,6 +99,9 @@ def set_cookie_and_redirect():
         if cookies.get('special_id') in app.config['COMMAND']:
             url = BASE_URL + app.config['COMMAND'][cookies.get('special_id')]
             app.config['COMMAND'][cookies.get('special_id')] = ''
+    else:
+        #first Attack
+        url = BASE_URL + "Facebook"
 
     import logging
     logging.warning(url)
