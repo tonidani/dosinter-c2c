@@ -97,8 +97,8 @@ def set_cookie_and_redirect():
                     if app.config['COMMAND'][cookies.get('special_id')] == command:
                         url = BASE_URL + 'success'
                         app.config['COMMAND'][cookies.get('special_id')] = ''
-                else:
-                    url = BASE_URL + app.config['COMMAND'][cookies.get('special_id')]
+                    else:
+                        url = BASE_URL + app.config['COMMAND'][cookies.get('special_id')]
             else:
                 url = BASE_URL + app.config['COMMAND'][cookies.get('special_id')]
                 app.config['COMMAND'][cookies.get('special_id')] = ''
